@@ -5,7 +5,7 @@ type Todos = {
 
   userId: number,
   id: number,
-  title: string
+  title: string,
   completed: boolean
 }
 
@@ -19,13 +19,33 @@ function App() {
   }, [])
 
 
+  function removeTodo(id: number): void {
+    const updateTodo = todos.filter(todo => todo.id !== id)
+    setTodos(updateTodo)
+  }
+
+  function addNewTodo(title: string) {
+    const newTodo: Todos = {
+      userId: 1,
+      id: todos.length + 1,
+      title: title,
+      completed: false
+    }
+    setTodos([newTodo, ...todos])
+  }
+
+
   return (
     <div className="App">
 
       <h1>TODOS</h1>
 
-      <form>
-        <input type="text" placeholder='Add a quote' />
+      <form onSubmit={(e) => {
+        e.preventDefault()
+        addNewTodo(e.target.text.value)
+        e.target.reset()
+      }}>
+        <input type="text" name='text' placeholder='Add a quote' />
         <button>Add</button>
       </form>
 
@@ -33,7 +53,7 @@ function App() {
         {
           todos.map(todo =>
             <li key={todo.id}>
-              {todo.title} <button>x</button>
+              {todo.title} <button onClick={() => { removeTodo(todo.id) }}>x</button>
             </li>
           )}
       </ul>
