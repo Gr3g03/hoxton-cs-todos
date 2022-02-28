@@ -24,13 +24,16 @@ function App() {
 
       <h1>TODOS</h1>
 
-
+      <form>
+        <input type="text" placeholder='Add a quote' />
+        <button>Add</button>
+      </form>
 
       <ul>
         {
           todos.map(todo =>
             <li key={todo.id}>
-              {todo.title}
+              {todo.title} <button>x</button>
             </li>
           )}
       </ul>
