@@ -58,7 +58,9 @@ function App() {
 
       <form onSubmit={(e) => {
         e.preventDefault()
+        //@ts-ignore
         const updatedTodo = addTodo(todos, e.target.text.value)
+        //@ts-ignore
         e.target.reset()
         setTodos(updatedTodo)
       }}>
